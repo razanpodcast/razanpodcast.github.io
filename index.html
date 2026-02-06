@@ -17,7 +17,7 @@
             --card-bg: #0f0f0f;
             --card-border: #1f1f1f;
             --text-main: #ffffff;
-            --brand-color: #ff5e57; /* Salmon Red */
+            --brand-color: #ff5e57;
         }
 
         body {
@@ -36,15 +36,14 @@
             position: relative;
         }
 
-        /* --- THE INTENSIFIED GOD RAY --- */
+        /* --- 1. CINEMATIC SPOTLIGHT --- */
         .spotlight {
             position: absolute;
-            top: -100px; /* Moved up slightly to cast down */
+            top: -100px; 
             left: 50%;
             transform: translateX(-50%);
-            width: 120%; /* Wider than screen to look like a wash */
-            height: 600px;
-            /* Much stronger opacity (0.45) and defined stop points */
+            width: 120%;
+            height: 700px;
             background: radial-gradient(
                 ellipse at top, 
                 rgba(255, 94, 87, 0.45) 0%, 
@@ -53,27 +52,61 @@
             );
             z-index: -1;
             pointer-events: none;
-            filter: blur(20px); /* Softens the bands */
-            mix-blend-mode: screen; /* Makes it glow on black */
+            filter: blur(20px);
+            mix-blend-mode: screen;
+            animation: lightBreath 6s ease-in-out infinite alternate;
         }
 
-        /* A second light layer for the "Hotspot" right on the profile */
-        .spotlight-core {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255, 94, 87, 0.3) 0%, transparent 70%);
+        @keyframes lightBreath {
+            0% { opacity: 0.8; transform: translateX(-50%) scale(1); }
+            100% { opacity: 1.0; transform: translateX(-50%) scale(1.05); }
+        }
+
+        /* --- 2. ORIGINAL SHARP DUST (Reverted) --- */
+        .dust-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
             z-index: -1;
-            filter: blur(40px);
         }
 
-        /* --- HEADER --- */
+        .dust {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.6); /* Sharper white */
+            border-radius: 50%;
+            box-shadow: 0 0 2px rgba(255, 255, 255, 0.8); /* Sharp glow */
+            bottom: -10px;
+            opacity: 0;
+            animation: floatDust linear infinite;
+        }
+
+        .d1 { left: 10%; animation-duration: 12s; animation-delay: 0s; }
+        .d2 { left: 25%; animation-duration: 15s; animation-delay: 2s; }
+        .d3 { left: 40%; animation-duration: 10s; animation-delay: 5s; }
+        .d4 { left: 55%; animation-duration: 18s; animation-delay: 1s; }
+        .d5 { left: 70%; animation-duration: 14s; animation-delay: 3s; }
+        .d6 { left: 85%; animation-duration: 11s; animation-delay: 6s; }
+        .d7 { left: 15%; animation-duration: 16s; animation-delay: 8s; }
+        .d8 { left: 50%; animation-duration: 13s; animation-delay: 4s; }
+        .d9 { left: 95%; animation-duration: 19s; animation-delay: 2s; }
+        .d10 { left: 5%; animation-duration: 20s; animation-delay: 5s; }
+
+        @keyframes floatDust {
+            0% { bottom: -10px; opacity: 0; transform: translateY(0); }
+            20% { opacity: 1; }
+            80% { opacity: 0.8; }
+            100% { bottom: 100%; opacity: 0; transform: translateY(-50px) translateX(10px); }
+        }
+
+        /* --- HEADER & PROFILE --- */
         .header {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 15px; 
             position: relative;
         }
 
@@ -81,11 +114,26 @@
             width: 120px;
             height: 120px;
             border-radius: 50%; 
-            border: 2px solid #222; 
+            border: 2px solid #fff; 
             padding: 4px;
             background: #000;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.8);
             object-fit: cover;
+            animation: reactorGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes reactorGlow {
+            0% {
+                box-shadow: 0 0 15px rgba(255, 94, 87, 0.3), inset 0 0 10px rgba(255, 94, 87, 0.2);
+                border-color: #555;
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(255, 94, 87, 0.7), inset 0 0 20px rgba(255, 94, 87, 0.5);
+                border-color: #fff;
+            }
+            100% {
+                box-shadow: 0 0 15px rgba(255, 94, 87, 0.3), inset 0 0 10px rgba(255, 94, 87, 0.2);
+                border-color: #555;
+            }
         }
 
         h1 { 
@@ -94,7 +142,16 @@
             margin: 15px 0 5px 0; 
             letter-spacing: -0.5px;
             color: #fff;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            position: relative;
+            background: linear-gradient(to right, #fff 0%, #ffcfcc 50%, #fff 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineText 5s linear infinite;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
         }
 
         .tagline { 
@@ -103,7 +160,8 @@
             font-weight: 300; 
             letter-spacing: 0.5px; 
             opacity: 0.9;
-            text-shadow: 0 0 25px rgba(255, 94, 87, 0.6); /* Stronger text glow */
+            text-shadow: 0 0 25px rgba(255, 94, 87, 0.6);
+            margin-bottom: 0px; 
         }
 
         /* --- SECTIONS --- */
@@ -111,7 +169,7 @@
             font-size: 0.75rem;
             color: #666;
             letter-spacing: 1px;
-            margin: 25px 0 12px 0;
+            margin: 15px 0 12px 0; 
             width: 100%;
             max-width: 420px;
             text-align: right;
@@ -158,10 +216,23 @@
             filter: drop-shadow(0 0 8px rgba(255, 94, 87, 0.4)); 
         }
 
-        /* Priority Cards (Castbox/Apple) get a subtle border boost */
+        /* --- HIGHLIGHTED BUTTONS (Pulsing Effect) --- */
         .priority-card {
-            border-color: #2a2a2a; 
-            background: #141414;
+            background: #141414; /* Slightly lighter background */
+            border-color: var(--brand-color); /* Initial border color */
+            animation: pulseAttention 2s infinite alternate; /* The magic pulse */
+        }
+
+        /* Subtle pulsing glow for priority cards */
+        @keyframes pulseAttention {
+            0% {
+                border-color: #333;
+                box-shadow: 0 0 0 rgba(255, 94, 87, 0);
+            }
+            100% {
+                border-color: var(--brand-color);
+                box-shadow: 0 0 12px rgba(255, 94, 87, 0.3);
+            }
         }
 
         .link-card:active {
@@ -170,16 +241,16 @@
             border-color: var(--brand-color);
         }
 
-        /* Animation */
+        /* Entrance Animations */
         @keyframes slideUp {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .header { animation: slideUp 0.6s ease backwards; }
-        .sec-1 { animation: slideUp 0.6s ease 0.1s backwards; }
-        .sec-2 { animation: slideUp 0.6s ease 0.2s backwards; }
-        .sec-3 { animation: slideUp 0.6s ease 0.3s backwards; }
+        .header { animation: slideUp 0.8s ease backwards; }
+        .sec-1 { animation: slideUp 0.8s ease 0.1s backwards; }
+        .sec-2 { animation: slideUp 0.8s ease 0.2s backwards; }
+        .sec-3 { animation: slideUp 0.8s ease 0.3s backwards; }
 
         footer {
             margin-top: 50px;
@@ -193,7 +264,18 @@
 <body>
 
     <div class="spotlight"></div>
-    <div class="spotlight-core"></div>
+    <div class="dust-container">
+        <div class="dust d1"></div>
+        <div class="dust d2"></div>
+        <div class="dust d3"></div>
+        <div class="dust d4"></div>
+        <div class="dust d5"></div>
+        <div class="dust d6"></div>
+        <div class="dust d7"></div>
+        <div class="dust d8"></div>
+        <div class="dust d9"></div>
+        <div class="dust d10"></div>
+    </div>
 
     <div class="header">
         <img src="https://image.zil.ink/zilink//resized/200x200/34dd1fe1202c60bafd065b0f02c8244b.png" alt="Razan Podcast" class="profile-img">
