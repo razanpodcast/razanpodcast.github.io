@@ -2,23 +2,22 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>پادکست رازان | Razan Podcast</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;300;500;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <style>
         :root {
-            --bg-color: #f8f9fa; 
-            --card-bg: #ffffff;
-            --accent-color: #c9a730; 
-            --text-main: #222222; 
-            --text-dim: #666666;
-            --border-color: #e0e0e0;
+            --bg-color: #050505;
+            --card-bg: #0f0f0f;
+            --card-border: #1f1f1f;
+            --text-main: #ffffff;
+            --brand-color: #ff5e57; /* Salmon Red */
         }
 
         body {
@@ -28,121 +27,173 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px 15px; /* Very tight padding */
+            padding: 40px 20px;
             margin: 0;
-            -webkit-font-smoothing: antialiased; 
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            position: relative;
         }
 
+        /* --- THE INTENSIFIED GOD RAY --- */
+        .spotlight {
+            position: absolute;
+            top: -100px; /* Moved up slightly to cast down */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120%; /* Wider than screen to look like a wash */
+            height: 600px;
+            /* Much stronger opacity (0.45) and defined stop points */
+            background: radial-gradient(
+                ellipse at top, 
+                rgba(255, 94, 87, 0.45) 0%, 
+                rgba(255, 94, 87, 0.1) 40%, 
+                transparent 70%
+            );
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(20px); /* Softens the bands */
+            mix-blend-mode: screen; /* Makes it glow on black */
+        }
+
+        /* A second light layer for the "Hotspot" right on the profile */
+        .spotlight-core {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255, 94, 87, 0.3) 0%, transparent 70%);
+            z-index: -1;
+            filter: blur(40px);
+        }
+
+        /* --- HEADER --- */
         .header {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 35px;
+            position: relative;
         }
 
         .profile-img {
-            width: 90px; /* Slightly smaller to save space */
-            height: 90px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%; 
-            margin-bottom: 5px;
-            border: 1px solid var(--border-color);
+            border: 2px solid #222; 
             padding: 4px;
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: #000;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.8);
+            object-fit: cover;
         }
 
         h1 { 
-            font-size: 1.4rem; 
-            font-weight: 500; 
-            margin: 0; 
-            color: #000;
+            font-size: 1.8rem; 
+            font-weight: 700; 
+            margin: 15px 0 5px 0; 
+            letter-spacing: -0.5px;
+            color: #fff;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .tagline { 
-            color: var(--accent-color); 
-            font-size: 0.9rem; 
+            color: var(--brand-color);
+            font-size: 0.95rem; 
             font-weight: 300; 
-            margin-top: 2px;
+            letter-spacing: 0.5px; 
+            opacity: 0.9;
+            text-shadow: 0 0 25px rgba(255, 94, 87, 0.6); /* Stronger text glow */
         }
 
-        .section-title {
+        /* --- SECTIONS --- */
+        .section-label {
+            font-size: 0.75rem;
+            color: #666;
+            letter-spacing: 1px;
+            margin: 25px 0 12px 0;
             width: 100%;
             max-width: 420px;
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            /* Ultra tight margins */
-            margin: 12px 0 6px 0;
             text-align: right;
-            padding-right: 2px;
             font-weight: 500;
+            border-bottom: 1px solid #1a1a1a;
+            padding-bottom: 5px;
         }
 
-        /* GRID SYSTEM */
         .links-container {
             width: 100%;
             max-width: 420px;
             display: grid;
-            grid-template-columns: 1fr 1fr; /* 2 Columns */
-            gap: 8px; /* Tighter gap */
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
+        
+        .full-width { grid-template-columns: 1fr; }
 
-        /* Full width for single items (like Email) */
-        .full-width {
-            grid-template-columns: 1fr;
-        }
-
+        /* --- CARDS --- */
         .link-card {
-            background-color: var(--card-bg);
-            color: var(--text-main);
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            color: #eee;
             text-decoration: none;
-            padding: 12px 10px; 
+            padding: 16px 14px;
             border-radius: 12px; 
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            font-weight: 400; 
-            font-size: 0.9rem; 
-            transition: all 0.2s ease;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: transform 0.1s ease, background 0.2s, border-color 0.2s;
+            position: relative;
         }
 
-        /* Centered content for full-width buttons */
-        .full-width .link-card {
-            justify-content: center;
-        }
+        .full-width .link-card { justify-content: center; }
 
         .link-card i {
-            font-size: 1.1rem; 
-            margin-left: 10px;
-            width: 20px;
+            font-size: 1.3rem;
+            margin-left: 14px;
+            width: 24px;
             text-align: center;
-            color: var(--text-dim);
+            color: var(--brand-color); 
+            filter: drop-shadow(0 0 8px rgba(255, 94, 87, 0.4)); 
         }
 
-        .link-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        /* Priority Cards (Castbox/Apple) get a subtle border boost */
+        .priority-card {
+            border-color: #2a2a2a; 
+            background: #141414;
+        }
+
+        .link-card:active {
+            transform: scale(0.96);
+            background: #1a1a1a;
+            border-color: var(--brand-color);
+        }
+
+        /* Animation */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Icons Colors */
-        .spotify i { color: #1DB954; }
-        .youtube i { color: #FF0000; }
-        .instagram i { color: #E1306C; }
-        .castbox i { color: #F55B23; }
-        .shenoto i { color: #2196F3; }
-        .apple i { color: #888; }
-        .email i { color: #555; }
+        .header { animation: slideUp 0.6s ease backwards; }
+        .sec-1 { animation: slideUp 0.6s ease 0.1s backwards; }
+        .sec-2 { animation: slideUp 0.6s ease 0.2s backwards; }
+        .sec-3 { animation: slideUp 0.6s ease 0.3s backwards; }
 
         footer {
-            margin-top: 20px;
-            font-size: 0.65rem; 
-            color: #aaa;
-            letter-spacing: 2px;
-            font-weight: 300;
+            margin-top: 50px;
+            font-size: 0.7rem;
+            color: #333;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
     </style>
 </head>
 <body>
+
+    <div class="spotlight"></div>
+    <div class="spotlight-core"></div>
 
     <div class="header">
         <img src="https://image.zil.ink/zilink//resized/200x200/34dd1fe1202c60bafd065b0f02c8244b.png" alt="Razan Podcast" class="profile-img">
@@ -150,40 +201,46 @@
         <div class="tagline">روایتگر داستان‌های ناگفته</div>
     </div>
 
-    <div class="section-title">پلتفرم‌های شنیداری</div>
-    <div class="links-container">
-        <a href="https://castbox.fm/channel/id6336958" class="link-card castbox" target="_blank">
-            <i class="fa-solid fa-tower-broadcast"></i> کست‌باکس
-        </a>
-        <a href="https://open.spotify.com/show/..." class="link-card spotify" target="_blank">
-            <i class="fa-brands fa-spotify"></i> اسپاتیفای
-        </a>
-        <a href="https://podcasts.apple.com/us/podcast/razan-%D8%B1%D8%A7%D8%B2%D8%A7%D9%86/id1766655700" class="link-card apple" target="_blank">
-            <i class="fa-brands fa-apple"></i> اپل پادکست
-        </a>
-        <a href="https://shenoto.com/channel/podcast/razan-%7C-%D8%B1%D8%A7%D8%B2%D8%A7%D9%86-feed" class="link-card shenoto" target="_blank">
-            <i class="fa-solid fa-microphone-lines"></i> شنوتو
-        </a>
+    <div class="sec-1" style="width: 100%; display:flex; flex-direction:column; align-items:center;">
+        <div class="section-label">پلتفرم‌های شنیداری</div>
+        <div class="links-container">
+            <a href="https://castbox.fm/channel/id6336958" class="link-card priority-card" target="_blank">
+                <i class="fa-solid fa-tower-broadcast"></i> <span>کست‌باکس</span>
+            </a>
+            <a href="https://podcasts.apple.com/us/podcast/razan-%D8%B1%D8%A7%D8%B2%D8%A7%D9%86/id1766655700" class="link-card priority-card" target="_blank">
+                <i class="fa-brands fa-apple"></i> <span>اپل پادکست</span>
+            </a>
+            <a href="https://open.spotify.com/show/57t5COEtMAs0tTZ1gpw7Lg" class="link-card" target="_blank">
+                <i class="fa-brands fa-spotify"></i> <span>اسپاتیفای</span>
+            </a>
+            <a href="https://shenoto.com/channel/podcast/razan-%7C-%D8%B1%D8%A7%D8%B2%D8%A7%D9%86-feed" class="link-card" target="_blank">
+                <i class="fa-solid fa-microphone-lines"></i> <span>شنوتو</span>
+            </a>
+        </div>
     </div>
 
-    <div class="section-title">شبکه‌های اجتماعی</div>
-    <div class="links-container">
-        <a href="https://www.youtube.com/@RazanPodcast/videos" class="link-card youtube" target="_blank">
-            <i class="fa-brands fa-youtube"></i> یوتیوب
-        </a>
-        <a href="https://www.instagram.com/razan.podcast/" class="link-card instagram" target="_blank">
-            <i class="fa-brands fa-instagram"></i> اینستاگرام
-        </a>
+    <div class="sec-2" style="width: 100%; display:flex; flex-direction:column; align-items:center;">
+        <div class="section-label">شبکه‌های اجتماعی</div>
+        <div class="links-container">
+            <a href="https://www.youtube.com/@RazanPodcast/videos" class="link-card" target="_blank">
+                <i class="fa-brands fa-youtube"></i> <span>یوتیوب</span>
+            </a>
+            <a href="https://www.instagram.com/razan.podcast/" class="link-card" target="_blank">
+                <i class="fa-brands fa-instagram"></i> <span>اینستاگرام</span>
+            </a>
+        </div>
     </div>
 
-    <div class="section-title">ارتباط</div>
-    <div class="links-container full-width">
-        <a href="mailto:Razanpodcast@gmail.com" class="link-card email" target="_blank">
-            <i class="fa-solid fa-envelope-open"></i> ارسال ایمیل
-        </a>
+    <div class="sec-3" style="width: 100%; display:flex; flex-direction:column; align-items:center;">
+        <div class="section-label">ارتباط</div>
+        <div class="links-container full-width">
+            <a href="mailto:Razanpodcast@gmail.com" class="link-card" target="_blank">
+                <i class="fa-solid fa-envelope-open"></i> <span>ارسال ایمیل</span>
+            </a>
+        </div>
     </div>
 
-    <footer>RAZAN PODCAST</footer>
+    <footer>RAZAN PODCAST © 2026</footer>
 
 </body>
 </html>
